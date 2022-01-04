@@ -48,7 +48,10 @@ public class ProductoFacadeREST extends AbstractFacade<Producto> {
     public ProductoFacadeREST() {
         super(Producto.class);
     }
-
+    /**
+     * POST: Los campos de texto no se deben enviar en el Path debido a los caracteres especiales que pueden contener
+     * @param entity 
+     */
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -150,11 +153,17 @@ public class ProductoFacadeREST extends AbstractFacade<Producto> {
                 , usuario, contraseña, propiedades_mapa, error);
         return entityManager;
     }
-
-    @GET
-    @Path("{from}/{to}/{descripcion}")
+    /**
+     * POST: Los campos de texto no se deben enviar en el Path debido a los caracteres especiales que pueden contener
+     * @param from
+     * @param to
+     * @param descripcion
+     * @return 
+     */
+    @POST
+    @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public LinkedList_envuelta<Producto> findLike_descripcion(@PathParam("from") Integer from, @PathParam("to") Integer to, @PathParam("descripcion") String descripcion) {
+    public LinkedList_envuelta<Producto> findLike_descripcion(@PathParam("from") Integer from, @PathParam("to") Integer to, String descripcion) {
         LinkedList_envuelta<Producto> linkedList_envuelta = new LinkedList_envuelta();
         List<Producto> productos_lista;
         String texto;     
@@ -197,13 +206,21 @@ public class ProductoFacadeREST extends AbstractFacade<Producto> {
         linkedList_envuelta.lista = new LinkedList(productos_lista);
         return linkedList_envuelta;
     }
-
-    @GET
-    @Path("{from}/{to}/{descripcion}/{campo_ordenacion}/{asc}")
+    /**
+     * POST: Los campos de texto no se deben enviar en el Path debido a los caracteres especiales que pueden contener
+     * @param from
+     * @param to
+     * @param descripcion
+     * @param campo_ordenacion
+     * @param asc
+     * @return 
+     */
+    @POST
+    @Path("{from}/{to}/{campo_ordenacion}/{asc}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public LinkedList_envuelta<Producto> findLike_descripcion_orden(@PathParam("from") Integer from
             , @PathParam("to") Integer to
-            , @PathParam("descripcion") String descripcion
+            , String descripcion
             , @PathParam("campo_ordenacion") String campo_ordenacion
             , @PathParam("asc") String asc) {
         LinkedList_envuelta<Producto> linkedList_envuelta = new LinkedList_envuelta();
