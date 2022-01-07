@@ -57,6 +57,7 @@ public class ProductoFacadeREST extends AbstractFacade<Producto> {
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Producto entity) {
         String texto;     
+        // Usar cookies: context.getCookies();
         texto = context.getHeader(jdbc_usuario);
         propiedades_mapa.put(jdbc_usuario, texto);
         texto = context.getHeader(jdbc_contraseña);        
